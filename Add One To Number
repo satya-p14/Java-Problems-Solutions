@@ -1,0 +1,29 @@
+//Given a non-negative number represented as an array of digits, add 1 to the number ( increment the number represented by the digits ).
+//The digits are stored such that the most significant digit is at the head of the list.
+
+public static ArrayList<Integer> AddOneToNumber(ArrayList<Integer> A){
+    ArrayList<Integer> output = new ArrayList<Integer>();
+    int n = A.size();
+    int carry = 0;
+    int sum =  A.get(n-1) + 1;
+    output.add(sum % 10);
+    carry = sum / 10;
+    for (int i = n - 2; i >= 0; i--) {
+        int sumO = carry + A.get(i);
+        output.add(sumO % 10);
+        carry = sumO / 10;
+    }
+    if (carry != 0) {
+        output.add(carry);
+    }
+    int x = output.size();
+    for (int i = 0; i < x / 2; i++) {
+        int temp = output.get(i);
+        output.set(i, output.get(x - i - 1));
+        output.set(x - i - 1, temp);
+    }
+    while (output.get(0) == 0) {
+        output.remove(0);
+    }
+    return output;
+}
