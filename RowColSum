@@ -1,3 +1,15 @@
+Get Sum of each row 
+Get Sum of each cloumn 
+Store in new array and return . 
+Input A = {
+                {1, 2},
+                {4, 5},
+                {8, 9}
+        };
+
+Output A = {3 , 9 , 17 , 13  , 16}
+
+
 public int[] RowColSum(int[][] A){
         int row = A.length;
         int col = A[0].length;
