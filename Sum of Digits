@@ -1,0 +1,7 @@
+// Sum of Digits using recursion
+
+public static int SumOfDigits(int A){
+    if (A == 0)
+        return 0;
+    return (A % 10 + SumOfDigits(A / 10));
+}
