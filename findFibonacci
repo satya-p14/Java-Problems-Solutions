@@ -1,0 +1,6 @@
+// Given a number A, find and return the Ath Fibonacci Number using recursion.
+
+public static int findFibonacci(int A){
+    if(A <= 1) return A;
+    return findFibonacci(A-1)+findFibonacci(A-2);
+}
