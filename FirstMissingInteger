@@ -1,0 +1,19 @@
+//  First Missing positive Integer
+
+public static int  FirstMissingInteger(ArrayList<Integer> A){
+    int n = A.size();
+    for (int i = 0; i < n; i++) {
+        int element = A.get(i);
+        if(element >= 1 && element <= n ){
+            int chair = element - 1;
+            if(A.get(chair) != element){
+                Collections.swap(A, chair, i);
+                i--;
+            }
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        if(i+1 != A.get(i)) return i+1;
+    }
+    return n+1;
+}
