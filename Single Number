@@ -1,0 +1,11 @@
+
+//    Q1. Single Number
+//    Given an array of integers A, every element appears twice except for one. Find that integer that occurs once.
+
+public static int SingleNumber(ArrayList<Integer> A){
+    int x = 0;
+    for (int i = 0; i < A.size(); i++) {
+        x = x ^ A.get(i);
+    }
+    return x;
+}
