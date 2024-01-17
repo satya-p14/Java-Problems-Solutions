@@ -23,3 +23,37 @@ public static  ArrayList<Integer> SingleNumber_3(ArrayList<Integer> A){
     Collections.sort(out);
     return out;
 }
+
+// Solution 2
+
+
+public boolean CheckBits(int A, int B){
+    if ((A & (1 << B)) != 0) return true;
+    return false;
+}
+
+public ArrayList<Integer> SingleNumber_3(ArrayList<Integer> A) {
+    int k = 0;
+    int N = A.size();
+    for (int i = 0; i < N; i++) {
+        k = (k ^ A.get(i));
+    }
+    for (int i = 0; i < 32; i++) {
+        if(CheckBits(k,i)){
+            k = i;
+            break;
+        }
+    }
+    int num1 = 0;
+    int num2 = 0;
+    for (int i = 0; i < N; i++) {
+        if (CheckBits(A.get(i),k)) {
+            num1 = (num1 ^ A.get(i));
+        }else {
+            num2 = (num2 ^ A.get(i));
+        }
+    }
+    ArrayList<Integer> out = new ArrayList<Integer>(Arrays.asList(num1,num2));
+    Collections.sort(out);
+    return out;
+}
