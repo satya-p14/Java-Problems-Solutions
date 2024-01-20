@@ -1,0 +1,20 @@
+
+//    Find smallest number greater than n with exactly 1 bit different in binary form.
+
+    public static long smallestNumberGreaterThatN(long n){
+        int shiftCount = 0;
+        int power_of_2 = 1;
+        while (true){
+            System.out.println((n >> shiftCount));
+            System.out.println((n >> shiftCount) & 1);
+            if(((n >> shiftCount) & 1) % 2 == 0){
+                break;
+            }
+            shiftCount++;
+            power_of_2 = power_of_2 * 2;
+            System.out.println(shiftCount);
+            System.out.println(power_of_2);
+        }
+        return (n + power_of_2);
+
+    }
