@@ -1,0 +1,22 @@
+
+
+//   How many ways we can Convert A to B using bitwise OR .
+//   Using formula A | X = B
+
+
+
+
+public static int WaysToConverA_B(int A, int B){
+    int count = 1;
+    // A&1==1
+    while (A != 0 &&  B != 0){
+        if((A&1) == 1 ){
+            if((B&1) == 1){
+                count = count * 2;
+            }else return 0;
+        }
+        A = A>>1;
+        B = B>>1;
+    }
+    return count;
+}
