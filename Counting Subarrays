@@ -1,0 +1,38 @@
+Counting Subarrays!
+Given an array A of N non-negative numbers and you are also given non-negative number B.
+You need to find the number of subarrays in A having sum less than B.
+
+// brute force solution 
+
+public int CountingSubarrays(ArrayList<Integer> A, int B) {
+    int n = A.size();
+    int count = 0 ;        
+    for(int i = 0 ; i < n ; i++){
+        for(int j = i ; j < n ; j++){
+            int sum = 0 ;
+            for(int k = i ; k <= j ; k++){
+                sum += A.get(k);
+            }
+            if(sum < B) count++;                
+        }
+    }
+    return count;
+}
+
+// optimum solution using sliding window
+
+public int CountingSubarrays(ArrayList<Integer> A, int B) {
+    int n = A.size();
+    int minus = 0;
+    int count = 0 , sum = 0;        
+    for(int i = 0 ; i < n ; i++) {
+       sum += A.get(i);
+       while(sum >= B){
+           sum -= A.get(minus);
+           minus++;
+        }
+        count += i - minus + 1;
+    }
+    return count;
+}
+
