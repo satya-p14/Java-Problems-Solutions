@@ -1,0 +1,16 @@
+// Determine a number is power of 2 or not
+
+public static int Power_Of_2(int A){
+    int count = 0;
+    if(A < 0){
+        return -1;
+    }
+    while (A > 0){
+        count++;
+        A &= A-1;
+    }
+    if(count == 1){
+        return 1;
+    }
+    return -1;
+}
