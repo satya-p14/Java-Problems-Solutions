@@ -1,0 +1,33 @@
+//  Number of Digit One
+//  Given an integer A, find and return the total number of digit 1 appearing in all non-negative integers less than or equal to A.
+
+//  Solution 1
+
+public static int countDigitOne(int n){
+    int count = 0;
+    for (int i = 1; i <= n; i++){
+        String str = String.valueOf(i);
+        count += str.split("1", -1) . length - 1;
+    }
+    return count;
+}
+
+//  Solution 2
+
+public static int countDigitOne(int A){
+    int count = 0;
+    int q = A , x = 1;
+    do{
+        int digit = q % 10;
+        q = q / 10;
+        count += q * x;
+        if(digit == 1){
+            count += A % x + 1;
+        }
+        if( digit > 1){
+            count += x;
+        }
+        x = x * 10;
+    }while(q > 0);
+    return count;
+}
