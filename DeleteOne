@@ -1,0 +1,54 @@
+
+// Given an integer array A of size N. You have to delete one element such that the GCD(Greatest common divisor) of the remaining array is maximum. Find the maximum value of GCD.
+
+// Solution 1 with ArrayList
+
+public static int DeleteOne(ArrayList<Integer> A) {
+    int ans = 1;
+    ArrayList<Integer> PF_GCD = new ArrayList<Integer>();
+    ArrayList<Integer> SF_GCD = new ArrayList<Integer>();
+    int n = A.size();
+    PF_GCD.add(A.get(0));
+    for (int i = 0; i < n-1; i++) {
+        SF_GCD.add(0);
+    }
+    SF_GCD.add(A.get(n-1));
+    for(int i = 1; i < n; i++){
+        PF_GCD.add(i , gcd(PF_GCD.get(i-1), A.get(i)));;
+    }
+    for(int i = n-2; i >=0 ; i--){
+        SF_GCD.set(i, gcd(SF_GCD.get(i+1),A.get(i)));
+    }
+    System.out.println("PF " + PF_GCD);
+    System.out.println("SF " + SF_GCD);
+    for(int i = 1; i<= n-2; i++){
+        ans = Math.max(ans, gcd(PF_GCD.get(i-1), SF_GCD.get(i+1)));
+    }
+    ans = Math.max(ans, SF_GCD.get(1));
+    ans = Math.max(ans, PF_GCD.get(n-2));
+    return ans;
+}
+
+
+// Solution 2 with Array
+
+public static int solve_delete_one(int[] A) {
+    int n = A.length;        
+    int[] pf_gcd = new int[n];        
+    int[] sf_gcd = new int[n];        
+    pf_gcd[0] = A[0];
+    sf_gcd[n-1] = A[n-1];
+    for(int i=1; i<n; i++){
+        pf_gcd[i] = gcd(pf_gcd[i-1], A[i]);
+    }
+    for(int i=n-2; i>=0; i--){
+        sf_gcd[i] = gcd(sf_gcd[i+1], A[i]);
+    }
+    int max = 1;        
+    for(int i=1; i<=n-2; i++){
+        max = Math.max(max, gcd(pf_gcd[i-1], sf_gcd[i+1]));
+    }        
+    max = Math.max(max, sf_gcd[1]);        
+    max = Math.max(max, pf_gcd[n-2]);
+    return max;
+}
