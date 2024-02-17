@@ -1,0 +1,30 @@
+//    Consecutive Numbers Sum
+//    Given a positive integer A.
+//    Return the number of ways it can be written as a sum of consecutive positive integers.
+
+
+//   Solution 1 : 
+
+public static int ConsecutiveNumbersSum_2(int A){
+    int count = 0;
+    int i = 1;
+    while (A > 0){
+        A = A - i;
+        if(A % i == 0) count++;
+        i++;
+    }
+    return count;
+}
+
+//   Solution 2 : 
+
+public static int ConsecutiveNumbersSum(int A){
+    int count = 0;
+    for (int i = 1; i * (i - 1) < 2 * A; i++) {
+        int numerator = A - (i * (i - 1)) / 2;
+        if (numerator % i == 0) {
+            count++;
+        }
+    }
+    return count;
+}
