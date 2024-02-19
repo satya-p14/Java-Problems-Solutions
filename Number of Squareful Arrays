@@ -1,0 +1,87 @@
+//  Given an array of integers A, the array is squareful if for every pair of adjacent elements, their sum is a perfect square.
+//  Find and return the number of permutations of A that are squareful. Two permutations A1 and A2 differ if and only if there is some index i such that A1[i] != A2[i].
+
+//  Solution 1
+
+public class Solution {
+    int count ;    
+
+    public int solve(ArrayList<Integer> A) {
+        int n = A.size();
+        if (n < 2) {
+            return count;
+        }
+        NumberOfSquarefulArraysHelper(A, n, 0);
+        return count;
+    }
+
+     private void NumberOfSquarefulArraysHelper(ArrayList<Integer> A, int n, int start ) {
+        if (start == n) {
+            count++;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = start; i < n; i++) {
+            if (set.contains(A.get(i))) {
+                continue;
+            }
+            Collections.swap(A,start,i);
+            if (start == 0 || isPerfectSq( A.get(start), A.get(start - 1))) {
+                NumberOfSquarefulArraysHelper(A, n, start + 1 );
+            }
+            Collections.swap(A,start,i);
+            set.add(A.get(i));
+        }
+    }
+    private  boolean isPerfectSq(int a, int b) {
+        int x = a + b;
+        double sqrt = Math.sqrt(x);
+        return sqrt - (int) sqrt == 0;
+    }
+}
+
+//  Solution 2
+
+public class Solution {
+    int count;
+    public int solve(int[] A) {
+        int n = A.length;
+        if (n < 2) {
+            return count;
+        }
+        backtrackHelper(A, n, 0);
+        return count;
+    }
+
+    private void backtrackHelper(int[] nums, int n, int start) {
+        if (start == n) {
+            count++;
+        }
+        Set<Integer> set = new HashSet<>();
+        for (int i = start; i < n; i++) {
+            if (set.contains(nums[i])) {
+                continue;
+            }
+            swap(nums, start, i);
+            if (start == 0 || isPerfectSq(nums[start], nums[start - 1])) {
+                backtrackHelper(nums, n, start + 1);
+            }
+            swap(nums, start, i);
+            set.add(nums[i]);
+        }
+    }
+
+    private void swap(int[] array, int a, int b) {
+        int temp = array[a];
+        array[a] = array[b];
+        array[b] = temp;
+    }
+
+    private boolean isPerfectSq(int a, int b) {
+        int x = a + b;
+        double sqrt = Math.sqrt(x);
+        return sqrt - (int) sqrt == 0;
+    }
+}
+
+
+
