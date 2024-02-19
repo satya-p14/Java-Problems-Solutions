@@ -1,0 +1,23 @@
+//  Letter Phone
+//  Given a digit string A, return all possible letter combinations that the number could represent.
+//  The digit 0 maps to 0 itself. The digit 1 maps to 1 itself.
+
+
+public void letterCombinationsHelper(String A , int Idx , String tmpAns , ArrayList<String> ans){
+    final String[] Keypad = new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+    if(Idx  == A.length()){
+        ans.add(tmpAns);
+    }else{
+        int num = A.charAt(Idx) - '0';
+        for(char c : Keypad[num].toCharArray()){
+            letterCombinationsHelper(A, Idx + 1, tmpAns + c , ans);
+        }
+    }
+}
+
+public ArrayList<String> letterCombinations(String A) {
+    ArrayList<String> ans = new ArrayList<>();
+    if (A.isEmpty()) return new ArrayList<>();        
+    letterCombinationsHelper(A,0,"",ans);
+    return ans;
+}
