@@ -1,0 +1,22 @@
+Given a read-only array of n + 1 integers between 1 and n, find one number that repeats in linear time using less than O(n) space and traversing the stream sequentially O(1) times.
+If there are multiple possible answers ( like in the sample case ), output any one, if there is no duplicate, output -1
+
+
+
+public int repeatedNumber(final List<Integer> A) {
+    int count = 1;
+    HashMap<Integer,Integer> hm = new HashMap<>();
+    for (int i = 0; i < A.size(); i++) {
+        if(!hm.containsKey(A.get(i))){
+            hm.put(A.get(i),1);
+        }else{
+            hm.put(A.get(i),++count);
+        }
+    }
+    for (Map.Entry<Integer,Integer> entry : hm.entrySet()){
+        if(entry.getValue() > 1){
+            return entry.getKey();
+        }
+    }
+    return -1;
+}
