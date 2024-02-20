@@ -1,0 +1,21 @@
+
+//     Count Sort
+//    Given an array A. Sort this array using Count Sort Algorithm and return the sorted array.
+
+public static ArrayList<Integer> CountSort(ArrayList<Integer> A) {
+    ArrayList<Integer> ans = new ArrayList<>();
+    int max = Collections.max(A);
+    int index = 0 ;
+    int[] aux = new int[max+1];
+    Arrays.fill(aux,0);
+    for (int i = 0; i < A.size(); i++) {
+        aux[A.get(i)] += 1 ;
+    }
+    for (int i = 0; i < max + 1; i++) {
+        for (int j = 1; j <= aux[i]; j++) {
+            ans.add(index , i);
+            index++;
+        }
+    }
+    return ans;
+}
