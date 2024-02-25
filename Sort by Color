@@ -1,0 +1,22 @@
+Q4. Sort by Color
+//    Given an array with N objects colored red, white, or blue,
+//    sort them so that objects of the same color are adjacent,
+//    with the colors in the order red, white, and blue.
+//    We will represent the colors as,
+//    red -> 0
+//    white -> 1
+//    blue -> 2
+//    Note: Using the library sort function is not allowed.
+//    A = [0, 1, 2, 0, 1, 2]
+//    [0, 0, 1, 1, 2, 2]
+    public static ArrayList<Integer> sortByColors(ArrayList<Integer> A) {
+        Collections.sort(A, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                if(o1 > o2) return 1;
+                if(o1 < o2) return -1;
+                return 0;
+            }
+        });
+        return A;
+    }
