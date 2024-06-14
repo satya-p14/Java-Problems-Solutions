@@ -15,3 +15,21 @@ public  int MaximumArraySumAfterBNegations(ArrayList<Integer> A , int B){
     }
     return sum;
 }
+
+public int largestSumAfterKNegations(int[] nums, int k) {
+    int sum = 0;
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    for(int value : nums){
+        pq.add(value);
+    }
+    while(k --> 0){
+        int temp = pq.poll();
+        temp = -temp;
+        pq.add(temp);
+        
+    }
+    while(!pq.isEmpty()){
+        sum += pq.poll();
+    }
+    return sum;
+}
