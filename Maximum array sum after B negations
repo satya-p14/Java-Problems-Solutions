@@ -1,0 +1,17 @@
+//    Maximum array sum after B negations
+//    Given an array of integers A and an integer B. You must modify the array exactly B number of times.
+//    In a single modification, we can replace any one array element A[i] by -A[i].
+//    You need to perform these modifications in such a way that after exactly B modifications,
+//    sum of the array must be maximum
+
+public  int MaximumArraySumAfterBNegations(ArrayList<Integer> A , int B){
+    int sum = 0;
+    PriorityQueue <Integer> minHeap = new PriorityQueue <> (A);
+    for (int i = 0; i < B; i++) {
+        minHeap.add(minHeap.remove() * -1);
+    }
+    while (!minHeap.isEmpty()) {
+        sum += minHeap.remove();
+    }
+    return sum;
+}
