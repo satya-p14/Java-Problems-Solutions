@@ -1,0 +1,16 @@
+//    Connect ropes
+//    You are given an array A of integers that represent the lengths of ropes.
+//    You need to connect these ropes into one rope. The cost of joining two ropes equals the sum of their lengths.
+//    Find and return the minimum cost to connect these ropes into one rope.
+
+public static int ConnectRopes(ArrayList<Integer> A){
+    int ans = 0;
+    PriorityQueue<Integer> pq = new PriorityQueue<>();
+    pq.addAll(A);
+    while(pq.size() > 1){
+        int twoSum = pq.remove() + pq.remove();
+        ans = ans + twoSum;
+        pq.add(twoSum);
+    }
+    return ans;
+}
