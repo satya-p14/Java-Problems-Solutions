@@ -1,0 +1,29 @@
+Given a binary tree, return the preorder traversal of its nodes’ values.
+
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> preorderTraversal(TreeNode A) {
+        ArrayList<Integer> ans = new ArrayList();
+        Preorder(A , ans);
+        return ans;
+    }
+    
+    public void Preorder(TreeNode root , ArrayList<Integer> path ){
+        if(root == null) return;
+        path.add(root.val);
+        Preorder(root.left , path);
+        Preorder(root.right , path);
+    }
+}
