@@ -36,6 +36,33 @@ public class Solution {
             return a;
         }
         return getSuccessor(a.right , b);
+	}
+}
+
+
+
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+	public TreeNode getSuccessor(TreeNode a, int b) {
+        TreeNode ans = null;       
+        while(a != null){
+            if(a.val > b){
+                ans = a;
+                a = a.left;
+            }else{
+                a = a.right;
+            }
+        }
+        return ans;
 	}    
     
 }
+
