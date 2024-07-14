@@ -1,0 +1,30 @@
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        if(root == null) return;
+        TreeLinkNode curr = root;
+        while(curr.left != null){
+            TreeLinkNode tmp = curr;
+            while(tmp != null){
+                tmp.left.next = tmp.right;
+                if(tmp.next != null){
+                    tmp.right.next = tmp.next.left;
+                }
+                tmp = tmp.next;
+            }
+            curr = curr.left;
+        }        
+    }
+}
