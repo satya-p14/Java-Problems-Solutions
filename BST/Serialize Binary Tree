@@ -1,0 +1,63 @@
+Given the root node of a Binary Tree denoted by A. You have to Serialize the given Binary Tree in the described format.
+
+Serialize means encode it into a integer array denoting the Level Order Traversal of the given Binary Tree.
+
+NOTE:
+
+In the array, the NULL/None child is denoted by -1.
+For more clarification check the Example Input.
+
+Input 1:
+
+           1
+         /   \
+        2     3
+       / \
+      4   5
+
+
+Output 1:
+
+ [1, 2, 3, 4, 5, -1, -1, -1, -1, -1, -1]
+
+
+
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<Integer> solve(TreeNode A) {
+        ArrayList<Integer> ans = new ArrayList<Integer>();
+        if(A == null) {
+            return ans;
+        };
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(A);
+        while (!q.isEmpty()){
+            int N = q.size();
+            for (int i = 0; i < N; i++) {
+                TreeNode currNode = q.remove();
+                if(currNode != null){
+                    ans.add(currNode.val);
+                    q.add(currNode.left);
+                    q.add(currNode.right);
+                }else{
+                    ans.add(-1);
+                }
+            }
+        }
+        return ans;
+    }
+}
+
+
