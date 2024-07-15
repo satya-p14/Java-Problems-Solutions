@@ -33,6 +33,9 @@ return
  *     }
  * }
  */
+
+// Using Stack
+
 public class Solution {
     public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode A) {        
         ArrayList<ArrayList<Integer>> ans = new ArrayList();
@@ -63,3 +66,52 @@ public class Solution {
         return ans;
     }
 }
+
+
+// Using Array list
+
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode A) {
+        ArrayList<ArrayList<Integer>> ans = new ArrayList();
+        if(A == null) return ans;
+        Queue<TreeNode> q = new LinkedList();
+        q.add(A);
+        boolean flag = false;
+        while(!q.isEmpty()){
+            int N = q.size();
+            ArrayList<Integer> level = new ArrayList();
+             ArrayList<Integer> tempArr = new ArrayList<>();
+            for(int i = 0 ; i < N ; i++){
+                TreeNode node  = q.remove();
+                if(flag){
+                    tempArr.add(node.val);
+                }else{
+                    level.add(node.val);
+                }
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+            }
+            flag = !flag;
+            Collections.reverse(tempArr);
+            for (int x : tempArr){
+                level.add(x);
+            }
+            ans.add(level);
+        }
+        return ans;
+    }
+}
+
