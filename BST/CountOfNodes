@@ -1,0 +1,8 @@
+Given a binary tree, return the count of its nodes.
+
+public static int CountOfNodes(Node root){
+      if(root == null) return 0;
+      int leftCnt = CountOfNodes(root.left);
+      int rightCnt = CountOfNodes(root.right);
+      return leftCnt + rightCnt + root.data;
+  }
