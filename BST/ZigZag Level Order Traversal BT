@@ -1,0 +1,65 @@
+ZigZag Level Order Traversal BT
+
+Given a binary tree, return the zigzag level order traversal of its nodes values. (ie, from left to right, then right to left for the next level and alternate between).
+
+Given binary tree
+
+    3
+   / \
+  9  20
+    /  \
+   15   7
+
+return
+
+[
+         [3],
+         [20, 9],
+         [15, 7]
+]
+
+
+
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode A) {        
+        ArrayList<ArrayList<Integer>> ans = new ArrayList();
+        if(A == null) return ans;
+        Queue<TreeNode> q = new LinkedList();
+        q.add(A);
+        boolean flag = false;
+        while(!q.isEmpty()){
+            int N = q.size();
+            ArrayList<Integer> level = new ArrayList();
+            Stack<Integer> st = new Stack();
+            for(int i = 0 ; i < N ; i++){
+                TreeNode node = q.remove();
+                if(flag){
+                    st.add(node.val);
+                }else{
+                    level.add(node.val);
+                }
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+            }
+            flag = !flag;
+            while(!st.isEmpty()){
+                level.add(st.pop());
+            }
+            ans.add(level);
+        }
+        return ans;
+    }
+}
