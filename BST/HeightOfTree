@@ -1,0 +1,8 @@
+Given a binary tree, return the Height of tree.
+
+public static int HeightOfTree(Node root){
+    if(root == null) return 0;
+    int leftH = HeightOfTree(root.left);
+    int rightH = HeightOfTree(root.right);
+    return Math.max(leftH  , rightH) + 1;
+}
