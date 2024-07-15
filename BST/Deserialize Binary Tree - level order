@@ -1,0 +1,57 @@
+Deserialize Binary Tree
+
+You are given an integer array A denoting the Level Order Traversal of the Binary Tree.
+
+You have to Deserialize the given Traversal in the Binary Tree and return the root of the Binary Tree.
+
+Input 1:
+
+ A = [1, 2, 3, 4, 5, -1, -1, -1, -1, -1, -1]
+
+Output 1:
+
+           1
+         /   \
+        2     3
+       / \
+      4   5
+
+
+/**
+ * Definition for binary tree
+ * class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) {
+ *      val = x;
+ *      left=null;
+ *      right=null;
+ *     }
+ * }
+ */
+public class Solution {    
+    public TreeNode solve(ArrayList<Integer> A) {
+        if (A.isEmpty() || A.get(0) == -1) {
+            return null;
+        }
+        TreeNode root = new TreeNode(A.get(0));
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        int idx = 1;
+        while (!q.isEmpty()) {
+            TreeNode current = q.remove();             
+            if (idx < A.size() && A.get(idx) != -1) {
+                current.left = new TreeNode(A.get(idx));
+                q.add(current.left);
+            }
+            idx++;            
+            if (idx < A.size() && A.get(idx) != -1) {
+                current.right = new TreeNode(A.get(idx));
+                q.add(current.right);
+            }
+            idx++;
+        }
+        return root;
+    }
+}
