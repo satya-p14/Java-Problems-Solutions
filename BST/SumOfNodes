@@ -1,0 +1,9 @@
+Given a binary tree, return the sum of its nodes values.
+
+
+public static int SumOfNodes(Node root){
+  if(root == null) return 0;
+  int leftSum = CountOfNodes(root.left);
+  int rightSum = CountOfNodes(root.right);
+  return leftSum + rightSum + 1;
+}
