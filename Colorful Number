@@ -1,0 +1,75 @@
+Given a number A, find if it is COLORFUL number or not.
+
+If number A is a COLORFUL number return 1 else, return 0.
+
+What is a COLORFUL Number:
+
+A number can be broken into different consecutive sequence of digits. 
+The number 3245 can be broken into sequences like 3, 2, 4, 5, 32, 24, 45, 324, 245 and 3245. 
+This number is a COLORFUL number, since the product of every consecutive sequence of digits is different
+
+
+public class Solution {
+    public int colorful(int A) {
+        String str = String.valueOf(A);
+        int len = str.length();
+        Map<Integer , Integer> map = new HashMap<>();
+        ArrayList<Integer> multiples = new ArrayList<>();
+        int idx = 0 ;
+        while (len > 0) {
+            int res = 1;
+            for (int i = len - 1; i >= 0; i--) {
+                res *= Character.getNumericValue(str.charAt(i));
+                multiples.add(res);
+            }
+            len--;
+        }        
+        return CountFrequency(multiples);
+    }
+
+    public int CountFrequency(ArrayList<Integer> A){
+        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+        for (int i =0; i<A.size() ; i++) {
+            int curr = A.get(i);
+            if(!hm.containsKey(curr)) {
+                hm.put(curr, 1);
+            } else {
+                int freq = hm.get(curr);
+                hm.put(curr, freq + 1);
+            }
+        }
+        for (int x : hm.values()) {
+            if(x >= 2){
+                return 0;
+            }
+        }
+        return 1;
+    }
+}
+
+
+
+
+-------------------------------------------------
+
+
+public class Solution {
+    public int colorful(int A) {
+        String str = String.valueOf(A);
+        int len = str.length();
+        HashSet<Integer> hs = new HashSet<Integer>();
+        while (len > 0) {
+            int res = 1;
+            for (int i = len - 1; i >= 0; i--) {
+                res *= Character.getNumericValue(str.charAt(i));                
+                if(!hs.add(res)){
+                    return 0;
+                }
+            }
+            len--;
+        }
+        return 1;
+    }
+}
+
+
