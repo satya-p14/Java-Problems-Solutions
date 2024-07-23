@@ -1,0 +1,51 @@
+Problem Description
+As it is Tushar's Birthday on March 1st, he decided to throw a party to all his friends at TGI Fridays in Pune. Given are the eating capacity of each friend, filling capacity of each dish and cost of each dish. A friend is satisfied if the sum of the filling capacity of dishes he ate is equal to his capacity. Find the minimum cost such that all of Tushar's friends are satisfied (reached their eating capacity).
+
+NOTE:
+
+Each dish is supposed to be eaten by only one person. Sharing is not allowed.
+
+Each friend can take any dish unlimited number of times.
+
+There always exists a dish with filling capacity 1 so that a solution always exists.
+
+Input 1:
+
+A = [2, 4, 6]
+B = [2, 1, 3]
+C = [2, 5, 3]
+
+Input 2:
+
+A = [2]
+B = [1]
+C = [2]
+
+Output 1: 12
+Output 2: 4
+
+
+public class Solution {
+  // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+  public int solve(final int[] A, final int[] B, final int[] C) {
+      int maxEatingCapacity = Arrays.stream(A).max().getAsInt();
+      int eatingCapacityLength  = A.length;
+      int fillingCapacityLength = B.length;        
+      int[] dp = new int[maxEatingCapacity + 1];
+      Arrays.fill(dp, Integer.MAX_VALUE);
+      dp[0] = 0;
+      for(int  i = 1 ; i <= maxEatingCapacity ; i++){
+          for(int j = 0  ; j < fillingCapacityLength ; j++){
+              if(B[j] <= i && dp[i - B[j]] != Integer.MAX_VALUE){
+                  dp[i] = Math.min(dp[i] , C[j] + dp[i - B[j]]);
+              }
+          }
+      }
+      int ans = 0 ;
+      for(int i = 0 ; i < eatingCapacityLength ; i++){
+          ans += dp[A[i]];
+      }
+      return ans;
+  }
+}
+
