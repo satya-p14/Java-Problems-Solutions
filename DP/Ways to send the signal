@@ -1,0 +1,22 @@
+You are trying to send signals to aliens using a linear array of A laser lights. You don't know much about how the aliens are going to percieve the signals, but what you know is that if two consecutive lights are on then the aliens might take it as a sign of danger and destroy the earth.
+Find and return the total number of ways in which you can send a signal without compromising the safty of the earth. Return the ans % 109 + 7
+
+Input 1:  A = 2
+Input 2: A = 3
+Output 1: 3
+Output 2: 5
+
+public class Solution {
+  public int solve(int A) {        
+      if(A == 1) return 2;
+      if(A <= 0) return 1;
+      int mod = 1000000007;
+      int[] dp = new int[A+1];
+      dp[0] = 1;
+      dp[1] = 2;
+      for(int i = 2 ; i <= A ; i++) {
+          dp[i] = (dp[i-1] + dp[i-2]) % mod;
+      }
+      return dp[A] % mod;
+  }
+}
