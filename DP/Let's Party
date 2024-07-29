@@ -1,0 +1,36 @@
+In Danceland, one person can party either alone or can pair up with another person.
+Can you find in how many ways they can party if there are A people in Danceland?
+Note: Return your answer modulo 10003, as the answer can be large
+
+
+public class Solution {
+    public int solve(int A) {
+        int[] dp = new int[A+1];
+        Arrays.fill(dp,-1);
+        return DFS(A,dp);
+    }
+
+    private int DFS(int A, int[] dp){
+        if(A == 0) return 1;
+        if(A < 0) return 0;
+        if(dp[A] !=- 1) return dp[A];
+        int ans = 0;
+        ans = DFS(A-2,dp) * (A-1) + DFS(A-1 , dp);
+        return dp[A] = ans % 10003;
+    }
+}
+
+
+public class Solution {
+    public int solve(int A) {
+        int[] dp = new int[ A + 1];
+        dp[0] = 1; 
+        dp[1] = 1; 
+        for(int i = 2; i <= A; i++){
+            dp[i] = dp[i-1] + dp[i-2] * (i-1);
+            dp[i] = dp[i] % 10003;
+        }
+        return dp[A] % 10003;
+    }
+}
+
