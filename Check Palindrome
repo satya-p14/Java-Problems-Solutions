@@ -8,3 +8,16 @@ public static int CheckPalindrome(String A){
         return 0;
     return CheckPalindrome(A.substring(1,A.length()-1));
 }
+
+
+public static boolean polindromicNumber(int A){
+    int original = A;
+    int reverse = 0;
+    while(A > 0){
+        int r = A % 10;
+        reverse = reverse * 10 + r;
+        A = A / 10;
+    }
+    if(original == reverse) return true;
+    return false;
+}
